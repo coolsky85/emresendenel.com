@@ -2,51 +2,112 @@
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ProjectCard from '../components/ProjectCard.astro';
 
-const projects = [
+const experience = [
+  {
+    title: 'CONET Services GmbH',
+    role: 'Project Manager (Junior Projektleiter)',
+    period: 'Apr 2022 – Present',
+    tags: ['IT', 'Consulting', 'PMO', 'Project Management'],
+    description: 'Working in the Consulting & Management division. Responsibilities include project management, project controlling, quality management, on/offboarding, training planning, and stakeholder communication with clients and cross-functional teams.',
+  },
+  {
+    title: 'Public Sector — IT Infrastructure Project (Anonymous Client)',
+    role: 'Project Manager',
+    period: 'Jun 2022 – Dec 2024',
+    tags: ['Public Sector', 'IT Infrastructure', 'PMO'],
+    description: 'PMO and project management for a large-scale public sector IT infrastructure project based in Bonn. Managing data center operations and all associated services under a long-running government contract.',
+  },
+  {
+    title: 'Public Sector — IT Systems Support (Anonymous Client)',
+    role: 'Project Manager',
+    period: 'Jun 2023 – Mar 2024',
+    tags: ['Public Sector', 'IT', 'Server Infrastructure'],
+    description: 'Supporting IT infrastructure operations including server management, virtualization, SAN infrastructure, and client systems. Involved in testing and commissioning of new services and system environments.',
+  },
+  {
+    title: 'Doğuş Automotive — iHDCC (VW Car Configurator)',
+    role: 'Key Account Manager / Project Manager',
+    period: 'May 2016 – Apr 2017',
+    tags: ['Automotive', 'Digital Product', 'VW', 'Project Management'],
+    description: "Led the local implementation of Volkswagen AG's global Internet High Definition Car Configurator (iHDCC) in the Turkish market. Responsible for controlling, implementation, and interface management between VW AG and Doğuş Automotive. Live at: vw.com.tr",
+  },
+  {
+    title: 'Doğuş Automotive — Dogus System Optimization (NADIN/Turkuaz ERP)',
+    role: 'Project Manager',
+    period: 'Mar 2015 – Feb 2016',
+    tags: ['Automotive', 'ERP', 'System Integration'],
+    description: "Managed the integration of outsourced programs (NADIN) into the company's proprietary ERP system (Turkuaz). Handled controlling, interface management, and full project execution with 200 project days.",
+  },
+  {
+    title: 'Doğuş Automotive — "Which Volkswagen?" Online Video Catalogue',
+    role: 'Project Manager',
+    period: 'Mar 2017 – Jun 2017',
+    tags: ['Automotive', 'Digital Marketing', 'Content'],
+    description: "Created an online video comparison series to help customers choose their next Volkswagen. Managed full project delivery from concept to publication. Published on YouTube as a branded product series.",
+  }
+];
+
+const personalProjects = [
   {
     title: 'RTM — Road To Marathon',
     description: 'A marathon training companion app built web-first. Structured training plans, HealthKit integration, and post-run analytics.',
     tags: ['iOS App', 'Running', 'Product Management'],
     status: 'In Development',
     gradient: 'from-blue-50 to-indigo-50',
-  },
-  {
-    title: 'EA FC 2026 Trading Signals',
-    description: 'A predictive trading signals tool for EA FC 2026 player market. Real-time data flow simulation with buy/sell signal generation.',
-    tags: ['Web App', 'Data', 'Sports'],
-    status: 'Prototype',
-    gradient: 'from-emerald-50 to-teal-50',
-  },
+  }
 ];
 ---
 
 <BaseLayout
-  title="Projects | Emre Sendenel"
-  description="A selection of digital products and tools built by Emre Sendenel — from marathon training apps to predictive trading signal platforms."
+  title="Projects & Experience | Emre Sendenel"
+  description="A detailed overview of Emre Sendenel's professional footprint — from large-scale IT infrastructure PMO to digital product delivery and personal app development."
 >
   <section class="section-padding section-spacing">
     <div class="container-content">
       <!-- Header -->
       <div class="mb-12 animate-fade-up">
         <h1 class="font-display text-[36px] md:text-hero font-bold text-text-primary mb-4">
-          Projects
+          Projects & Experience
         </h1>
         <p class="text-body text-text-secondary max-w-xl">
-          A selection of digital products and tools I've built.
+          A detailed overview of my professional experience and personal projects.
         </p>
       </div>
 
-      <!-- Project Grid -->
-      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
-        {projects.map((project) => (
-          <ProjectCard
-            title={project.title}
-            description={project.description}
-            tags={project.tags}
-            status={project.status}
-            gradient={project.gradient}
-          />
-        ))}
+      <!-- Professional Experience -->
+      <div class="mb-16">
+        <h2 class="font-display text-h2 text-text-primary mb-8 animate-fade-up" style="animation-delay: 0.1s;">
+          Professional Experience
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+          {experience.map((exp) => (
+            <ProjectCard
+              title={exp.title}
+              role={exp.role}
+              period={exp.period}
+              description={exp.description}
+              tags={exp.tags}
+            />
+          ))}
+        </div>
+      </div>
+
+      <!-- Personal Projects -->
+      <div>
+        <h2 class="font-display text-h2 text-text-primary mb-8 reveal">
+          Personal Projects
+        </h2>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+          {personalProjects.map((project) => (
+            <ProjectCard
+              title={project.title}
+              description={project.description}
+              tags={project.tags}
+              status={project.status}
+              gradient={project.gradient}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </section>

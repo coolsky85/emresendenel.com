@@ -3,6 +3,8 @@ interface Props {
   title: string;
   description: string;
   tags: string[];
+  role?: string;
+  period?: string;
   status?: string;
   gradient?: string;
 }
@@ -11,6 +13,8 @@ const {
   title,
   description,
   tags,
+  role,
+  period,
   status,
   gradient = 'from-accent/10 to-accent/5',
 } = Astro.props;
@@ -32,7 +36,16 @@ const {
   </div>
 
   <!-- Title -->
-  <h3 class="font-body text-h3 text-text-primary mb-2">{title}</h3>
+  <h3 class="font-body text-h3 text-text-primary mb-1">{title}</h3>
+
+  <!-- Role and Period -->
+  {(role || period) && (
+    <div class="mb-3 text-[14px] font-medium text-text-secondary flex flex-wrap gap-x-2 items-center">
+      {role && <span class="text-text-primary">{role}</span>}
+      {role && period && <span class="text-border">•</span>}
+      {period && <span>{period}</span>}
+    </div>
+  )}
 
   <!-- Description -->
   <p class="text-[15px] text-text-secondary leading-relaxed mb-4">{description}</p>
