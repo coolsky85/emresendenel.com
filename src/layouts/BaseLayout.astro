@@ -20,6 +20,7 @@ const canonicalURL = canonical ? new URL(canonical, siteUrl).href : new URL(Astr
 const ogImageURL = new URL(ogImage, siteUrl).href;
 
 import Analytics from '@vercel/analytics/astro';
+import SpeedInsights from '@vercel/speed-insights/astro';
 import Nav from '../components/Nav.astro';
 import Footer from '../components/Footer.astro';
 
@@ -58,6 +59,7 @@ import '../styles/global.css';
       <script type="application/ld+json" set:html={JSON.stringify(jsonLd)} />
     )}
     <Analytics />
+    <SpeedInsights />
   </head>
   <body class="min-h-screen flex flex-col">
     <Nav />
