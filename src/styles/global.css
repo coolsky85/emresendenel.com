@@ -1,0 +1,153 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-text-primary font-body text-body;
+  }
+
+  h1,
+  h2 {
+    @apply font-display;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-body;
+  }
+
+  ::selection {
+    background-color: #1A1A2E;
+    color: #FFFFFF;
+  }
+}
+
+@layer components {
+  .btn-primary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white font-body font-medium text-[15px] rounded-md transition-all duration-200 ease-out hover:bg-accent-hover hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2;
+  }
+
+  .btn-secondary {
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-accent font-body font-medium text-[15px] rounded-md border-2 border-accent transition-all duration-200 ease-out hover:bg-accent hover:text-white hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2;
+  }
+
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20;
+  }
+
+  .section-spacing {
+    @apply py-section-mobile lg:py-section-desktop;
+  }
+
+  .container-content {
+    @apply max-w-content mx-auto;
+  }
+
+  .tag-chip {
+    @apply inline-block px-3 py-1 text-meta text-text-secondary bg-tag rounded-full;
+  }
+
+  .card {
+    @apply bg-surface border border-border rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg;
+  }
+
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
+  }
+
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Blog prose styles */
+.prose {
+  @apply text-body leading-relaxed text-text-primary;
+}
+
+.prose h1 {
+  @apply font-display text-hero mb-8 mt-12;
+}
+
+.prose h2 {
+  @apply font-display text-h2 mb-6 mt-10;
+}
+
+.prose h3 {
+  @apply font-body text-h3 mb-4 mt-8;
+}
+
+.prose p {
+  @apply mb-6;
+}
+
+.prose a {
+  @apply text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent transition-colors;
+}
+
+.prose ul,
+.prose ol {
+  @apply mb-6 pl-6;
+}
+
+.prose li {
+  @apply mb-2;
+}
+
+.prose ul li {
+  @apply list-disc;
+}
+
+.prose ol li {
+  @apply list-decimal;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-accent/20 pl-6 italic text-text-secondary my-6;
+}
+
+.prose code {
+  @apply font-mono text-[15px] bg-tag px-1.5 py-0.5 rounded;
+}
+
+.prose pre {
+  @apply font-mono text-[14px] bg-[#1a1a2e] text-white p-6 rounded-lg overflow-x-auto my-6;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 rounded-none text-white;
+}
+
+.prose img {
+  @apply rounded-lg my-8;
+}
+
+.prose hr {
+  @apply border-border my-10;
+}
+
+.prose strong {
+  @apply font-semibold;
+}
+
+/* Table of contents */
+.toc a {
+  @apply text-text-secondary text-meta hover:text-accent transition-colors block py-1;
+}
+
+.toc a.active {
+  @apply text-accent font-medium;
+}

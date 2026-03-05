@@ -1,0 +1,53 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ProjectCard from '../components/ProjectCard.astro';
+
+const projects = [
+  {
+    title: 'RTM — Road To Marathon',
+    description: 'A marathon training companion app built web-first. Structured training plans, HealthKit integration, and post-run analytics.',
+    tags: ['iOS App', 'Running', 'Product Management'],
+    status: 'In Development',
+    gradient: 'from-blue-50 to-indigo-50',
+  },
+  {
+    title: 'EA FC 2026 Trading Signals',
+    description: 'A predictive trading signals tool for EA FC 2026 player market. Real-time data flow simulation with buy/sell signal generation.',
+    tags: ['Web App', 'Data', 'Sports'],
+    status: 'Prototype',
+    gradient: 'from-emerald-50 to-teal-50',
+  },
+];
+---
+
+<BaseLayout
+  title="Projects | Emre Sendenel"
+  description="A selection of digital products and tools built by Emre Sendenel — from marathon training apps to predictive trading signal platforms."
+>
+  <section class="section-padding section-spacing">
+    <div class="container-content">
+      <!-- Header -->
+      <div class="mb-12 animate-fade-up">
+        <h1 class="font-display text-[36px] md:text-hero font-bold text-text-primary mb-4">
+          Projects
+        </h1>
+        <p class="text-body text-text-secondary max-w-xl">
+          A selection of digital products and tools I've built.
+        </p>
+      </div>
+
+      <!-- Project Grid -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-8 reveal">
+        {projects.map((project) => (
+          <ProjectCard
+            title={project.title}
+            description={project.description}
+            tags={project.tags}
+            status={project.status}
+            gradient={project.gradient}
+          />
+        ))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>
