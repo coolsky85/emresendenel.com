@@ -3,7 +3,7 @@ interface TimelineEntry {
   role: string;
   company: string;
   period: string;
-  description: string;
+  description?: string;
   isCurrent?: boolean;
 }
 
@@ -14,36 +14,46 @@ interface Props {
 const { entries } = Astro.props;
 ---
 
-<div class="relative pl-8">
+<div class="relative">
   <!-- Vertical line -->
-  <div class="absolute left-[7px] top-2 bottom-2 w-[1px] bg-accent/30"></div>
+  <div class="absolute left-[11px] top-4 bottom-4 w-[2px] bg-border"></div>
 
-  {entries.map((entry, i) => (
-    <div class={`relative pb-10 last:pb-0 group`}>
-      <!-- Dot -->
-      <div
-        class={`absolute left-[-25px] top-[6px] w-[15px] h-[15px] rounded-full border-2
-                ${entry.isCurrent
-                  ? 'bg-accent border-accent shadow-[0_0_8px_rgba(200,169,110,0.4)]'
-                  : 'bg-bg border-accent/40 group-hover:border-accent transition-colors duration-300'
-                }`}
-      ></div>
+  <div class="space-y-10">
+    {entries.map((entry) => (
+      <div class="relative pl-10 group">
+        <!-- Dot -->
+        <div
+          class:list={[
+            'absolute left-0 top-[6px] w-6 h-6 rounded-full border-2 flex items-center justify-center transition-colors',
+            entry.isCurrent
+              ? 'border-accent bg-accent'
+              : 'border-border bg-surface group-hover:border-accent/50',
+          ]}
+        >
+          {entry.isCurrent && (
+            <div class="w-2 h-2 rounded-full bg-white"></div>
+          )}
+        </div>
 
-      <!-- Content -->
-      <div>
-        <h3 class="font-body text-[18px] font-medium text-text-primary mb-1">
-          {entry.role}
-        </h3>
-        <p class="text-[14px] text-accent font-medium mb-1">
-          {entry.company}
-        </p>
-        <p class="text-meta text-text-secondary mb-2 uppercase tracking-wider">
-          {entry.period}
-        </p>
-        <p class="text-[15px] text-text-secondary leading-relaxed">
-          {entry.description}
-        </p>
+        <!-- Content -->
+        <div>
+          <h3 class="font-body text-[17px] font-semibold text-text-primary leading-snug">
+            {entry.role}
+          </h3>
+          <p class="text-meta text-text-secondary mt-1">
+            <span>{entry.company}</span>
+            <span class="mx-1.5">·</span>
+            <span class:list={[entry.isCurrent && 'text-accent font-medium']}>
+              {entry.period}
+            </span>
+          </p>
+          {entry.description && (
+            <p class="text-[15px] text-text-secondary mt-2 leading-relaxed">
+              {entry.description}
+            </p>
+          )}
+        </div>
       </div>
-    </div>
-  ))}
+    ))}
+  </div>
 </div>

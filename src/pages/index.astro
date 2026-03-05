@@ -22,29 +22,29 @@ const jsonLd = {
 
 const timelineEntries = [
   {
-    role: 'Project Manager',
+    role: 'Projektleiter',
     company: 'CONET Services GmbH',
     period: 'Apr 2022 – Present',
-    description: 'IT consulting and project delivery across public sector clients in Germany.',
+    description: 'Leading complex IT projects in public sector and enterprise environments with cross-functional teams.',
     isCurrent: true,
   },
   {
-    role: 'Project Manager — Public Sector',
-    company: 'Confidential Client',
+    role: 'PMO / Project Management',
+    company: 'intention.ist',
     period: 'Jun 2022 – Dec 2024',
-    description: 'PMO and project management for large-scale government IT infrastructure in Bonn.',
+    description: 'Established PMO processes and managed project portfolios for digital transformation initiatives.',
   },
   {
-    role: 'Project Manager — IT Systems',
-    company: 'Confidential Client',
-    period: 'Jun 2023 – Mar 2024',
-    description: 'IT infrastructure operations and system commissioning for a public sector client.',
+    role: 'Projektleiter',
+    company: 'Public Sector',
+    period: 'May 2023 – Apr 2024',
+    description: 'Managed stakeholder-intensive public sector digitalization project with Agile delivery.',
   },
   {
-    role: 'Product Manager / Project Manager',
-    company: 'Doğuş Automotive (VW Turkey)',
+    role: 'Product Owner / Project Manager',
+    company: 'Doğuş Automotive',
     period: 'Feb 2010 – Nov 2017',
-    description: "Product ownership and project management for VW Turkey's digital and ERP initiatives.",
+    description: 'Led digital product development and Agile adoption across automotive distribution operations.',
   },
 ];
 ---
@@ -57,38 +57,35 @@ const timelineEntries = [
   <!-- ==================== HERO ==================== -->
   <section
     id="hero"
-    class="min-h-[90vh] lg:min-h-screen flex items-center section-padding"
+    class="section-padding min-h-[80vh] lg:min-h-screen flex items-center"
   >
     <div class="container-content w-full">
-      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-20">
+      <div class="flex flex-col lg:flex-row items-center gap-12 lg:gap-16">
         <!-- Left Content -->
-        <div class="flex-1 lg:max-w-[55%]">
-          <h1 class="font-display text-[44px] md:text-[56px] lg:text-hero font-bold text-text-primary mb-4 tracking-tight animate-fade-up stagger-1">
-            Emre Sendenel
+        <div class="flex-1 lg:max-w-[60%] animate-fade-up">
+          <h1 class="font-display text-[40px] md:text-[52px] lg:text-hero font-bold text-text-primary mb-4 tracking-tight">
+            Project Manager.
           </h1>
-          <p class="text-[18px] md:text-[20px] font-body text-accent mb-2 font-medium tracking-wide animate-fade-up stagger-2">
-            Project Manager · PMP Certified
+          <p class="text-[17px] md:text-[19px] font-body text-text-secondary mb-2 font-medium tracking-wide">
+            PMP Certified · Düsseldorf, Germany
           </p>
-          <p class="text-meta text-text-secondary uppercase tracking-widest mb-6 animate-fade-up stagger-2">
-            Düsseldorf, Germany
-          </p>
-          <p class="text-body text-text-secondary max-w-[520px] mb-10 leading-relaxed animate-fade-up stagger-3">
-            15+ years delivering complex projects across IT consulting, automotive, and public sector. I turn strategy into execution — on time, on budget, across borders.
+          <p class="text-body text-text-secondary max-w-[520px] mb-8 leading-relaxed">
+            Delivering complex projects across technology, automotive, and public sector. 15+ years turning strategy into execution.
           </p>
 
           <!-- CTAs -->
-          <div class="flex flex-wrap gap-4 mb-8 animate-fade-up stagger-4">
+          <div class="flex flex-wrap gap-4 mb-8">
             <a href="/projects" class="btn-primary">View Projects</a>
             <a href="/contact" class="btn-secondary">Get in Touch</a>
           </div>
 
           <!-- Social Links -->
-          <div class="flex items-center gap-5 animate-fade-up stagger-5">
+          <div class="flex items-center gap-4">
             <a
               href="https://www.linkedin.com/in/emresendenel"
               target="_blank"
               rel="noopener noreferrer"
-              class="text-text-secondary hover:text-accent transition-colors duration-300"
+              class="text-text-secondary hover:text-accent transition-colors"
               aria-label="LinkedIn"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -99,7 +96,7 @@ const timelineEntries = [
             </a>
             <a
               href="mailto:emresendenel@gmail.com"
-              class="text-text-secondary hover:text-accent transition-colors duration-300"
+              class="text-text-secondary hover:text-accent transition-colors"
               aria-label="Email"
             >
               <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
@@ -111,17 +108,6 @@ const timelineEntries = [
         </div>
 
         <!-- Right — Photo -->
-        <div class="shrink-0 animate-fade-up stagger-3">
-          <div class="w-[260px] h-[260px] md:w-[300px] md:h-[300px] rounded-full overflow-hidden border-2 border-accent/30 shadow-[0_0_40px_rgba(200,169,110,0.08)]">
-            <img
-              src="/images/hero-photo.png"
-              alt="Emre Sendenel"
-              loading="eager"
-              width="300"
-              height="300"
-              class="w-full h-full object-cover"
-            />
-          </div>
         <div class="shrink-0 animate-fade-up" style="animation-delay: 0.2s;">
           <img
             src="/images/hero-photo.png"
@@ -137,7 +123,7 @@ const timelineEntries = [
   </section>
 
   <!-- ==================== ABOUT ==================== -->
-  <section id="about" class="section-padding section-divider">
+  <section id="about" class="section-padding section-spacing bg-surface border-y border-border">
     <div class="container-content">
       <div class="reveal">
         <h2 class="font-display text-h2 text-text-primary mb-12">About</h2>
@@ -145,26 +131,22 @@ const timelineEntries = [
         <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16">
           <!-- Left — Bio -->
           <div>
-            <p class="text-body text-text-secondary leading-relaxed mb-6">
-              I'm a certified Project Manager (PMP) with a background in Industrial Engineering and a postgraduate degree in Marketing Management. I've led cross-functional teams at CONET Services GmbH and Doğuş Automotive, managed large-scale public sector IT projects in Germany, and built digital products from concept to delivery.
-            </p>
             <p class="text-body text-text-secondary leading-relaxed">
-              I work across the full project lifecycle — from requirements and planning to controlling, stakeholder management, and go-live.
+              I'm a certified Project Manager (PMP) with a background in Industrial Engineering and Marketing Management. I've led cross-functional teams at CONET Services, Doğuş Automotive, and in Germany's public sector — managing budgets, Agile workflows, and stakeholder complexity across industries.
             </p>
           </div>
 
           <!-- Right — Fast Facts -->
-          <div class="space-y-0">
+          <div class="space-y-4">
             {[
-              { label: 'Certification', value: 'PMP (PMI) · ITIL® Foundation V4 · PSM I' },
-              { label: 'Education', value: 'Industrial Engineering B.Sc · Marketing Management PG Dip' },
+              { label: 'Certification', value: 'PMP (PMI)' },
+              { label: 'Background', value: 'Industrial Engineering · Marketing Management' },
               { label: 'Location', value: 'Düsseldorf, Germany' },
-              { label: 'Languages', value: 'Turkish (Native) · English (C1) · German (B2)' },
-              { label: 'Tools', value: 'Jira · MS Project · Azure DevOps · MS Office Suite' },
-              { label: 'Methodologies', value: 'Agile · Scrum · Waterfall · PMI Standards' },
+              { label: 'Languages', value: 'Turkish · English · German' },
+              { label: 'Tools', value: 'Jira · MS Project · Azure DevOps · MS Office' },
             ].map(({ label, value }) => (
-              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-6 py-4 border-b border-border last:border-b-0">
-                <span class="text-meta text-text-secondary font-medium uppercase tracking-wider shrink-0 sm:w-36">
+              <div class="flex flex-col sm:flex-row sm:items-baseline gap-1 sm:gap-4 py-3 border-b border-border last:border-b-0">
+                <span class="text-meta text-text-secondary font-medium uppercase tracking-wider shrink-0 sm:w-32">
                   {label}
                 </span>
                 <span class="text-[15px] text-text-primary font-body">
@@ -179,7 +161,7 @@ const timelineEntries = [
   </section>
 
   <!-- ==================== EXPERIENCE ==================== -->
-  <section id="experience" class="section-padding section-divider">
+  <section id="experience" class="section-padding section-spacing">
     <div class="container-content">
       <div class="reveal">
         <h2 class="font-display text-h2 text-text-primary mb-12">Experience</h2>
@@ -190,41 +172,29 @@ const timelineEntries = [
     </div>
   </section>
 
-  <!-- ==================== SELECTED WORK ==================== -->
-  <section id="projects" class="section-padding section-divider">
+  <!-- ==================== PROJECTS TEASER ==================== -->
+  <section id="projects" class="section-padding section-spacing bg-surface border-y border-border">
     <div class="container-content">
       <div class="reveal">
-        <h2 class="font-display text-h2 text-text-primary mb-12">Selected Work</h2>
+        <h2 class="font-display text-h2 text-text-primary mb-12">Selected Projects</h2>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           <ProjectCard
-            title="CONET Services GmbH"
-            role="Project Manager"
-            period="Apr 2022 – Present"
-            description="Leading IT projects within the Consulting & Management division. Responsibilities span full project lifecycle: planning, controlling, quality management, stakeholder communication, on/offboarding, and training coordination across client engagements."
-            tags={['IT Consulting', 'Project Management', 'PMO']}
-            status="Current"
-            statusType="current"
-            logo="/images/logos/conet.svg"
-            logoAlt="CONET Services logo"
-          />
-          <ProjectCard
             title="RTM — Road To Marathon"
-            description="A marathon training companion app built web-first. Structured training plans, HealthKit integration, and post-run analytics for runners at every level."
+            description="A marathon training companion app built web-first. Structured training plans, HealthKit integration, and post-run analytics."
             tags={['iOS App', 'Running', 'Product Management']}
             status="In Development"
-            statusType="dev"
             gradient="from-blue-50 to-indigo-50"
           />
         </div>
 
-        <div class="mt-10">
+        <div class="mt-8 text-center lg:text-left">
           <a
             href="/projects"
-            class="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors duration-300 font-body font-medium text-[15px] group"
+            class="inline-flex items-center gap-2 text-accent hover:text-accent-hover transition-colors font-body font-medium text-[15px] group"
           >
             View All Projects
-            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform duration-300">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="group-hover:translate-x-1 transition-transform">
               <line x1="5" y1="12" x2="19" y2="12"></line>
               <polyline points="12 5 19 12 12 19"></polyline>
             </svg>
@@ -235,12 +205,12 @@ const timelineEntries = [
   </section>
 
   <!-- ==================== CONTACT CTA ==================== -->
-  <section id="contact-cta" class="section-padding section-divider">
+  <section id="contact-cta" class="section-padding section-spacing">
     <div class="container-content">
       <div class="reveal text-center max-w-xl mx-auto">
         <h2 class="font-display text-h2 text-text-primary mb-4">Let's Work Together</h2>
-        <p class="text-body text-text-secondary mb-10">
-          Open to project management roles, PMO consulting, and collaborations.
+        <p class="text-body text-text-secondary mb-8">
+          Open to project management roles, consulting, and collaborations.
         </p>
         <a href="/contact" class="btn-primary">Send a Message</a>
       </div>

@@ -6,9 +6,7 @@ interface Props {
   role?: string;
   period?: string;
   status?: string;
-  statusType?: 'current' | 'completed' | 'dev';
-  logo?: string;
-  logoAlt?: string;
+  gradient?: string;
 }
 
 const {
@@ -18,38 +16,17 @@ const {
   role,
   period,
   status,
-  statusType = 'completed',
-  logo,
-  logoAlt = '',
+  gradient = 'from-accent/10 to-accent/5',
 } = Astro.props;
-
-const dotClass = statusType === 'current'
-  ? 'dot dot--current'
-  : statusType === 'dev'
-    ? 'dot dot--dev'
-    : 'dot dot--completed';
 ---
 
 <div class="card group cursor-default">
-  <!-- Logo / Image -->
-  {logo ? (
-    <div class="w-full h-40 rounded-md mb-5 bg-surface-elevated flex items-center justify-center overflow-hidden">
-      <img
-        src={logo}
-        alt={logoAlt}
-        class="max-w-[70%] max-h-[80%] object-contain"
-        loading="lazy"
-        width="200"
-        height="100"
-      />
-    </div>
-  ) : (
-    <div class="w-full h-40 rounded-md mb-5 bg-surface-elevated flex items-center justify-center">
-      <span class="text-text-secondary/30 font-display text-[32px] font-bold select-none">
-        {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
-      </span>
-    </div>
-  )}
+  <!-- Image Placeholder -->
+  <div class={`w-full h-48 rounded-lg mb-5 bg-gradient-to-br ${gradient} flex items-center justify-center`}>
+    <span class="text-accent/30 font-display text-[32px] font-bold select-none">
+      {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
+    </span>
+  </div>
 
   <!-- Tags -->
   <div class="flex flex-wrap gap-2 mb-3">
@@ -61,11 +38,6 @@ const dotClass = statusType === 'current'
   <!-- Title -->
   <h3 class="font-body text-h3 text-text-primary mb-1">{title}</h3>
 
-  <!-- Role & Period -->
-  {(role || period) && (
-    <div class="mb-3 text-[14px] font-medium text-text-secondary flex flex-wrap gap-x-2 items-center">
-      {role && <span class="text-accent">{role}</span>}
-      {role && period && <span class="text-border-hover">·</span>}
   <!-- Role and Period -->
   {(role || period) && (
     <div class="mb-3 text-[14px] font-medium text-text-secondary flex flex-wrap gap-x-2 items-center">
@@ -78,13 +50,28 @@ const dotClass = statusType === 'current'
   <!-- Description -->
   <p class="text-[15px] text-text-secondary leading-relaxed mb-4">{description}</p>
 
-  <!-- Status -->
-  {status && (
-    <div class="flex items-center justify-between">
-      <span class="status-chip">
-        <span class={dotClass}></span>
+  <!-- Status & Arrow -->
+  <div class="flex items-center justify-between">
+    {status && (
+      <span class="inline-flex items-center gap-1.5 text-meta text-text-secondary">
+        <span class="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse"></span>
         {status}
       </span>
-    </div>
-  )}
+    )}
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      width="20"
+      height="20"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      class="text-text-secondary group-hover:text-accent group-hover:translate-x-1 transition-all ml-auto"
+    >
+      <line x1="5" y1="12" x2="19" y2="12"></line>
+      <polyline points="12 5 19 12 12 19"></polyline>
+    </svg>
+  </div>
 </div>

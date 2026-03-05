@@ -2,217 +2,152 @@
 @tailwind components;
 @tailwind utilities;
 
-/* ===== BASE ===== */
 @layer base {
   html {
-    @apply scroll-smooth;
+    scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
 
   body {
-    @apply bg-bg text-text-primary font-body;
+    @apply bg-background text-text-primary font-body text-body;
+  }
+
+  h1,
+  h2 {
+    @apply font-display;
+  }
+
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-body;
   }
 
   ::selection {
-    @apply bg-accent/30 text-text-primary;
-  }
-
-  /* Scrollbar */
-  ::-webkit-scrollbar {
-    width: 6px;
-  }
-
-  ::-webkit-scrollbar-track {
-    background: #0A0A0A;
-  }
-
-  ::-webkit-scrollbar-thumb {
-    background: #333;
-    border-radius: 3px;
-  }
-
-  ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+    background-color: #1A1A2E;
+    color: #FFFFFF;
   }
 }
 
-/* ===== COMPONENTS ===== */
 @layer components {
-  .container-content {
-    @apply max-w-content mx-auto px-6 md:px-8;
-  }
-
-  .section-padding {
-    @apply py-section-sm md:py-section;
-  }
-
-  .section-divider {
-    border-top: 1px solid #1E1E1E;
-  }
-
-  /* Buttons */
   .btn-primary {
-    @apply inline-flex items-center justify-center px-7 py-3 bg-accent text-bg font-body font-medium text-[15px] rounded-none tracking-wide hover:bg-accent-hover transition-all duration-300 cursor-pointer select-none;
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-accent text-white font-body font-medium text-[15px] rounded-md transition-all duration-200 ease-out hover:bg-accent-hover hover:shadow-lg hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2;
   }
 
   .btn-secondary {
-    @apply inline-flex items-center justify-center px-7 py-3 bg-transparent text-accent font-body font-medium text-[15px] border border-accent rounded-none tracking-wide hover:bg-accent/10 transition-all duration-300 cursor-pointer select-none;
+    @apply inline-flex items-center justify-center px-8 py-3.5 bg-transparent text-accent font-body font-medium text-[15px] rounded-md border-2 border-accent transition-all duration-200 ease-out hover:bg-accent hover:text-white hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-accent/50 focus:ring-offset-2;
   }
 
-  /* Cards */
-  .card {
-    @apply bg-surface border border-border rounded-lg p-6 transition-all duration-300 hover:-translate-y-1.5 hover:border-border-hover;
+  .section-padding {
+    @apply px-6 md:px-12 lg:px-20;
   }
 
-  /* Tags */
+  .section-spacing {
+    @apply py-section-mobile lg:py-section-desktop;
+  }
+
+  .container-content {
+    @apply max-w-content mx-auto;
+  }
+
   .tag-chip {
-    @apply inline-block px-3 py-1 text-meta text-tag-text bg-tag-bg rounded-full uppercase tracking-wider select-none;
+    @apply inline-block px-3 py-1 text-meta text-text-secondary bg-tag rounded-full;
   }
 
-  /* Status Chip */
-  .status-chip {
-    @apply inline-flex items-center gap-1.5 text-meta text-text-secondary;
+  .card {
+    @apply bg-surface border border-border rounded-xl p-6 transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg;
   }
 
-  .status-chip .dot {
-    @apply w-1.5 h-1.5 rounded-full;
+  /* Scroll reveal animation */
+  .reveal {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.6s ease, transform 0.6s ease;
   }
 
-  .status-chip .dot--current {
-    @apply bg-green-500 animate-pulse;
-  }
-
-  .status-chip .dot--completed {
-    @apply bg-accent;
-  }
-
-  .status-chip .dot--dev {
-    @apply bg-blue-400 animate-pulse;
-  }
-
-  /* Nav link underline */
-  .nav-link {
-    @apply relative text-text-secondary hover:text-text-primary transition-colors duration-300;
-  }
-
-  .nav-link::after {
-    content: '';
-    @apply absolute bottom-0 left-0 w-0 h-[1.5px] bg-accent transition-all duration-300;
-  }
-
-  .nav-link:hover::after,
-  .nav-link.active::after {
-    @apply w-full;
-  }
-
-  .nav-link.active {
-    @apply text-text-primary;
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
-/* ===== PROSE (BLOG) ===== */
-@layer components {
-  .prose {
-    @apply text-body text-text-secondary font-body leading-relaxed;
-  }
-
-  .prose h1 {
-    @apply font-display text-[42px] font-bold text-text-primary mt-12 mb-6;
-  }
-
-  .prose h2 {
-    @apply font-display text-[32px] font-semibold text-text-primary mt-10 mb-4;
-  }
-
-  .prose h3 {
-    @apply font-body text-h3 font-semibold text-text-primary mt-8 mb-3;
-  }
-
-  .prose p {
-    @apply mb-6;
-  }
-
-  .prose a {
-    @apply text-accent underline underline-offset-4 hover:text-accent-hover transition-colors;
-  }
-
-  .prose ul,
-  .prose ol {
-    @apply mb-6 pl-6;
-  }
-
-  .prose li {
-    @apply mb-2;
-  }
-
-  .prose ul li {
-    @apply list-disc;
-  }
-
-  .prose ol li {
-    @apply list-decimal;
-  }
-
-  .prose blockquote {
-    @apply border-l-2 border-accent pl-6 italic text-text-secondary my-6;
-  }
-
-  .prose code {
-    @apply font-mono text-[14px] bg-surface-elevated text-accent px-1.5 py-0.5 rounded;
-  }
-
-  .prose pre {
-    @apply bg-surface-elevated p-6 rounded-lg my-6 overflow-x-auto;
-  }
-
-  .prose pre code {
-    @apply bg-transparent p-0;
-  }
-
-  .prose hr {
-    @apply border-border my-8;
-  }
-
-  .prose strong {
-    @apply text-text-primary font-semibold;
-  }
-
-  .prose img {
-    @apply rounded-lg my-8;
-  }
+/* Blog prose styles */
+.prose {
+  @apply text-body leading-relaxed text-text-primary;
 }
 
-/* ===== SCROLL REVEAL ===== */
-.reveal {
-  opacity: 0;
-  transform: translateY(24px);
-  transition: opacity 0.6s cubic-bezier(0.4, 0, 0.2, 1),
-    transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+.prose h1 {
+  @apply font-display text-hero mb-8 mt-12;
 }
 
-.reveal.visible {
-  opacity: 1;
-  transform: translateY(0);
+.prose h2 {
+  @apply font-display text-h2 mb-6 mt-10;
 }
 
-/* Stagger delays for hero */
-.stagger-1 {
-  animation-delay: 0s;
+.prose h3 {
+  @apply font-body text-h3 mb-4 mt-8;
 }
 
-.stagger-2 {
-  animation-delay: 0.15s;
+.prose p {
+  @apply mb-6;
 }
 
-.stagger-3 {
-  animation-delay: 0.30s;
+.prose a {
+  @apply text-accent underline decoration-accent/30 underline-offset-4 hover:decoration-accent transition-colors;
 }
 
-.stagger-4 {
-  animation-delay: 0.45s;
+.prose ul,
+.prose ol {
+  @apply mb-6 pl-6;
 }
 
-.stagger-5 {
-  animation-delay: 0.60s;
+.prose li {
+  @apply mb-2;
+}
+
+.prose ul li {
+  @apply list-disc;
+}
+
+.prose ol li {
+  @apply list-decimal;
+}
+
+.prose blockquote {
+  @apply border-l-4 border-accent/20 pl-6 italic text-text-secondary my-6;
+}
+
+.prose code {
+  @apply font-mono text-[15px] bg-tag px-1.5 py-0.5 rounded;
+}
+
+.prose pre {
+  @apply font-mono text-[14px] bg-[#1a1a2e] text-white p-6 rounded-lg overflow-x-auto my-6;
+}
+
+.prose pre code {
+  @apply bg-transparent p-0 rounded-none text-white;
+}
+
+.prose img {
+  @apply rounded-lg my-8;
+}
+
+.prose hr {
+  @apply border-border my-10;
+}
+
+.prose strong {
+  @apply font-semibold;
+}
+
+/* Table of contents */
+.toc a {
+  @apply text-text-secondary text-meta hover:text-accent transition-colors block py-1;
+}
+
+.toc a.active {
+  @apply text-accent font-medium;
 }
