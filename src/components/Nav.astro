@@ -1,117 +1,115 @@
 ---
 const currentPath = Astro.url.pathname;
-
 const navLinks = [
   { href: '/', label: 'Home' },
   { href: '/projects', label: 'Projects' },
   { href: '/blog', label: 'Blog' },
   { href: '/contact', label: 'Contact' },
 ];
-
-function isActive(href: string, current: string): boolean {
-  if (href === '/') return current === '/';
-  return current.startsWith(href);
-}
 ---
 
-<nav
-  id="main-nav"
-  class="fixed top-0 left-0 right-0 z-50 bg-white/90 backdrop-blur-md border-b border-border/60"
+<header
+  id="nav"
+  class="fixed top-0 left-0 right-0 z-50 border-b border-border-light"
+  style="background: rgba(255,255,255,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);"
 >
-  <div class="max-w-content mx-auto px-6 md:px-12 lg:px-20 flex items-center justify-between h-[72px]">
+  <div class="container-content flex items-center justify-between h-[72px]">
     <!-- Logo -->
-    <a
-      href="/"
-      class="font-display text-[22px] font-bold text-text-primary hover:text-accent transition-colors tracking-tight"
-      aria-label="Emre Sendenel - Home"
-    >
+    <a href="/" class="text-[20px] font-bold text-text-primary hover:text-accent transition-colors duration-200">
       Emre Sendenel
     </a>
 
-    <!-- Desktop Nav Links -->
-    <ul class="hidden md:flex items-center gap-8">
-      {navLinks.map(({ href, label }) => (
-        <li>
+    <!-- Desktop Nav -->
+    <nav class="hidden md:flex items-center gap-2" aria-label="Main navigation">
+      {navLinks.map(({ href, label }) => {
+        const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+        const isContact = href === '/contact';
+        return isContact ? (
           <a
             href={href}
-            class:list={[
-              'font-body text-[15px] font-medium transition-colors relative py-1',
-              isActive(href, currentPath)
-                ? 'text-accent after:absolute after:bottom-0 after:left-0 after:right-0 after:h-[2px] after:bg-accent after:rounded-full'
-                : 'text-text-secondary hover:text-text-primary',
-            ]}
+            class="ml-2 px-5 py-2 bg-accent text-white text-nav font-semibold rounded-btn
+                   hover:bg-accent-hover hover:-translate-y-0.5
+                   transition-all duration-200 shadow-card"
           >
             {label}
           </a>
-        </li>
-      ))}
-    </ul>
+        ) : isActive ? (
+          <a href={href} class="nav-link-active">{label}</a>
+        ) : (
+          <a href={href} class="nav-link px-3 py-1.5">{label}</a>
+        );
+      })}
+    </nav>
 
     <!-- Mobile Hamburger -->
     <button
-      id="mobile-menu-toggle"
-      class="md:hidden flex flex-col items-center justify-center w-10 h-10 gap-1.5 rounded-lg hover:bg-tag transition-colors"
-      aria-label="Toggle navigation menu"
+      id="menu-toggle"
+      class="md:hidden flex flex-col gap-[5px] w-8 h-8 items-center justify-center relative z-50"
+      aria-label="Toggle menu"
       aria-expanded="false"
     >
-      <span id="hamburger-top" class="block w-5 h-[2px] bg-text-primary transition-all duration-300 origin-center"></span>
-      <span id="hamburger-mid" class="block w-5 h-[2px] bg-text-primary transition-all duration-300"></span>
-      <span id="hamburger-bot" class="block w-5 h-[2px] bg-text-primary transition-all duration-300 origin-center"></span>
+      <span class="menu-line w-5 h-[2px] bg-text-primary transition-all duration-200 origin-center rounded-full"></span>
+      <span class="menu-line w-5 h-[2px] bg-text-primary transition-all duration-200 origin-center rounded-full"></span>
+      <span class="menu-line w-5 h-[2px] bg-text-primary transition-all duration-200 origin-center rounded-full"></span>
     </button>
   </div>
+</header>
 
-  <!-- Mobile Overlay -->
-  <div
-    id="mobile-menu"
-    class="md:hidden fixed inset-0 top-[72px] bg-white/98 backdrop-blur-lg z-40 opacity-0 pointer-events-none transition-opacity duration-300"
-  >
-    <ul class="flex flex-col items-center justify-center h-full gap-8">
-      {navLinks.map(({ href, label }) => (
-        <li>
-          <a
-            href={href}
-            class:list={[
-              'font-display text-[28px] font-semibold transition-colors',
-              isActive(href, currentPath) ? 'text-accent' : 'text-text-primary hover:text-accent',
-            ]}
-          >
-            {label}
-          </a>
-        </li>
-      ))}
-    </ul>
-  </div>
-</nav>
-
-<!-- Spacer for fixed nav -->
-<div class="h-[72px]"></div>
+<!-- Mobile Menu -->
+<div
+  id="mobile-menu"
+  class="fixed inset-x-0 top-[72px] z-40 bg-white border-b border-border shadow-card
+         max-h-0 overflow-hidden transition-all duration-300"
+>
+  <nav class="flex flex-col p-6 gap-1" aria-label="Mobile navigation">
+    {navLinks.map(({ href, label }) => {
+      const isActive = currentPath === href || (href !== '/' && currentPath.startsWith(href));
+      const isContact = href === '/contact';
+      return isContact ? (
+        <a
+          href={href}
+          class="mt-2 px-5 py-3 bg-accent text-white text-center font-semibold rounded-btn
+                 hover:bg-accent-hover transition-all duration-200"
+        >
+          {label}
+        </a>
+      ) : (
+        <a
+          href={href}
+          class={`px-4 py-3 rounded-btn text-[16px] font-medium transition-colors duration-200
+                  ${isActive ? 'bg-accent text-white' : 'text-text-primary hover:bg-tag-bg hover:text-accent'}`}
+        >
+          {label}
+        </a>
+      );
+    })}
+  </nav>
+</div>
 
 <script>
-  const toggle = document.getElementById('mobile-menu-toggle');
+  const toggle = document.getElementById('menu-toggle');
   const menu = document.getElementById('mobile-menu');
-  const top = document.getElementById('hamburger-top');
-  const mid = document.getElementById('hamburger-mid');
-  const bot = document.getElementById('hamburger-bot');
-  let isOpen = false;
+  const lines = toggle?.querySelectorAll('.menu-line');
+  let open = false;
 
   toggle?.addEventListener('click', () => {
-    isOpen = !isOpen;
-    toggle.setAttribute('aria-expanded', String(isOpen));
+    open = !open;
+    toggle.setAttribute('aria-expanded', String(open));
 
-    if (isOpen) {
-      menu?.classList.remove('opacity-0', 'pointer-events-none');
-      menu?.classList.add('opacity-100', 'pointer-events-auto');
-      top?.classList.add('rotate-45', 'translate-y-[5px]');
-      mid?.classList.add('opacity-0');
-      bot?.classList.add('-rotate-45', '-translate-y-[5px]');
-      document.body.style.overflow = 'hidden';
+    if (open) {
+      menu!.style.maxHeight = menu!.scrollHeight + 'px';
+      if (lines) {
+        lines[0].style.transform = 'rotate(45deg) translate(2px, 5px)';
+        lines[1].style.opacity = '0';
+        lines[2].style.transform = 'rotate(-45deg) translate(2px, -5px)';
+      }
     } else {
-      menu?.classList.add('opacity-0', 'pointer-events-none');
-      menu?.classList.remove('opacity-100', 'pointer-events-auto');
-      top?.classList.remove('rotate-45', 'translate-y-[5px]');
-      mid?.classList.remove('opacity-0');
-      bot?.classList.remove('-rotate-45', '-translate-y-[5px]');
-      document.body.style.overflow = '';
+      menu!.style.maxHeight = '0';
+      if (lines) {
+        lines[0].style.transform = '';
+        lines[1].style.opacity = '1';
+        lines[2].style.transform = '';
+      }
     }
   });
 </script>

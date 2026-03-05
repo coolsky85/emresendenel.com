@@ -3,23 +3,22 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import BlogCard from '../../components/BlogCard.astro';
 import { getCollection } from 'astro:content';
 
-const allPosts = (await getCollection('blog'))
+const posts = (await getCollection('blog'))
   .filter((post) => !post.data.draft)
   .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf());
 
-// Extract unique tags
-const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
+const allTags = [...new Set(posts.flatMap((post) => post.data.tags || []))];
 ---
 
 <BaseLayout
   title="Blog | Emre Sendenel"
-  description="Thoughts on project management, product building, and running — by Emre Sendenel, PMP-certified Project Manager based in Düsseldorf."
+  description="Thoughts on project management, product building, and running — by Emre Sendenel."
 >
-  <section class="section-padding section-spacing">
+  <section class="section-padding">
     <div class="container-content">
       <!-- Header -->
       <div class="mb-12 animate-fade-up">
-        <h1 class="font-display text-[36px] md:text-hero font-bold text-text-primary mb-4">
+        <h1 class="text-[40px] md:text-hero font-extrabold text-text-primary mb-4">
           Blog
         </h1>
         <p class="text-body text-text-secondary max-w-xl">
@@ -27,17 +26,22 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
         </p>
       </div>
 
-      <!-- Tag Filter -->
-      <div class="flex flex-wrap gap-2 mb-10 reveal" id="tag-filter">
+      <!-- Tag Filters -->
+      <div class="flex flex-wrap gap-2 mb-10 animate-fade-up" style="animation-delay: 0.12s;" id="tag-filters">
         <button
-          class="tag-filter-btn active px-4 py-2 rounded-full text-[14px] font-medium font-body transition-all duration-200 bg-accent text-white"
+          class="tag-filter-btn active px-4 py-2 text-meta uppercase tracking-wider rounded-pill
+                 bg-accent text-white font-semibold transition-all duration-200 cursor-pointer
+                 border border-accent"
           data-tag="all"
         >
           All
         </button>
         {allTags.map((tag) => (
           <button
-            class="tag-filter-btn px-4 py-2 rounded-full text-[14px] font-medium font-body transition-all duration-200 bg-tag text-text-secondary hover:bg-accent hover:text-white"
+            class="tag-filter-btn px-4 py-2 text-meta uppercase tracking-wider rounded-pill
+                   bg-tag-bg text-tag-text font-semibold border border-tag-border
+                   hover:bg-accent hover:text-white hover:border-accent
+                   transition-all duration-200 cursor-pointer"
             data-tag={tag}
           >
             {tag}
@@ -45,10 +49,10 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
         ))}
       </div>
 
-      <!-- Posts List -->
-      <div class="reveal" id="posts-list">
-        {allPosts.map((post) => (
-          <div data-tags={JSON.stringify(post.data.tags)}>
+      <!-- Posts -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6 reveal" id="posts-list">
+        {posts.map((post) => (
+          <div data-tags={JSON.stringify(post.data.tags || [])}>
             <BlogCard
               title={post.data.title}
               description={post.data.description}
@@ -59,41 +63,33 @@ const allTags = [...new Set(allPosts.flatMap((post) => post.data.tags))];
           </div>
         ))}
       </div>
-
-      {allPosts.length === 0 && (
-        <p class="text-text-secondary text-body text-center py-16">
-          No posts yet. Check back soon.
-        </p>
-      )}
     </div>
   </section>
-</BaseLayout>
 
-<script>
-  const buttons = document.querySelectorAll('.tag-filter-btn');
-  const posts = document.querySelectorAll('#posts-list > div');
+  <script>
+    const buttons = document.querySelectorAll('.tag-filter-btn');
+    const posts = document.querySelectorAll('#posts-list > div');
 
-  buttons.forEach((btn) => {
-    btn.addEventListener('click', () => {
-      const tag = (btn as HTMLElement).dataset.tag;
+    buttons.forEach((btn) => {
+      btn.addEventListener('click', () => {
+        const tag = btn.getAttribute('data-tag');
 
-      // Update active state
-      buttons.forEach((b) => {
-        b.classList.remove('active', 'bg-accent', 'text-white');
-        b.classList.add('bg-tag', 'text-text-secondary');
-      });
-      btn.classList.add('active', 'bg-accent', 'text-white');
-      btn.classList.remove('bg-tag', 'text-text-secondary');
+        buttons.forEach((b) => {
+          b.classList.remove('active', 'bg-accent', 'text-white', 'border-accent');
+          b.classList.add('bg-tag-bg', 'text-tag-text', 'border-tag-border');
+        });
+        btn.classList.add('active', 'bg-accent', 'text-white', 'border-accent');
+        btn.classList.remove('bg-tag-bg', 'text-tag-text', 'border-tag-border');
 
-      // Filter posts
-      posts.forEach((post) => {
-        const postTags = JSON.parse((post as HTMLElement).dataset.tags || '[]');
-        if (tag === 'all' || postTags.includes(tag)) {
-          (post as HTMLElement).style.display = '';
-        } else {
-          (post as HTMLElement).style.display = 'none';
-        }
+        posts.forEach((post) => {
+          if (tag === 'all') {
+            (post as HTMLElement).style.display = '';
+          } else {
+            const postTags = JSON.parse(post.getAttribute('data-tags') || '[]');
+            (post as HTMLElement).style.display = postTags.includes(tag) ? '' : 'none';
+          }
+        });
       });
     });
-  });
-</script>
+  </script>
+</BaseLayout>
