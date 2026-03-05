@@ -66,6 +66,11 @@ const dotClass = statusType === 'current'
     <div class="mb-3 text-[14px] font-medium text-text-secondary flex flex-wrap gap-x-2 items-center">
       {role && <span class="text-accent">{role}</span>}
       {role && period && <span class="text-border-hover">·</span>}
+  <!-- Role and Period -->
+  {(role || period) && (
+    <div class="mb-3 text-[14px] font-medium text-text-secondary flex flex-wrap gap-x-2 items-center">
+      {role && <span class="text-text-primary">{role}</span>}
+      {role && period && <span class="text-border">•</span>}
       {period && <span>{period}</span>}
     </div>
   )}
