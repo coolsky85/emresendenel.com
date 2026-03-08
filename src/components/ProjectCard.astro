@@ -9,7 +9,6 @@ interface Props {
   statusType?: 'current' | 'completed' | 'dev';
   logo?: string;
   logoAlt?: string;
-  logoStyle?: 'default' | 'cover' | 'logo-left';
 }
 
 const {
@@ -22,7 +21,6 @@ const {
   statusType = 'completed',
   logo,
   logoAlt = '',
-  logoStyle = 'default',
 } = Astro.props;
 
 const statusClass = statusType === 'current' ? 'status-current'
@@ -33,42 +31,18 @@ const statusClass = statusType === 'current' ? 'status-current'
 <div class="card group cursor-default">
   <!-- Logo / Image -->
   {logo ? (
-    logoStyle === 'cover' ? (
-      <div class="-mx-6 -mt-6 mb-5 h-[160px] overflow-hidden rounded-t-card">
-        <img
-          src={logo}
-          alt={logoAlt}
-          class="w-full h-full object-cover"
-          loading="lazy"
-          width="400"
-          height="160"
-        />
-      </div>
-    ) : logoStyle === 'logo-left' ? (
-      <div class="mb-5 flex items-center justify-start h-[40px]">
-        <img
-          src={logo}
-          alt={logoAlt}
-          class="max-w-[120px] max-h-[40px] object-contain"
-          loading="lazy"
-          width="120"
-          height="40"
-        />
-      </div>
-    ) : (
-      <div class="w-full h-36 rounded-stats mb-5 bg-gray-50 flex items-center justify-center overflow-hidden">
-        <img
-          src={logo}
-          alt={logoAlt}
-          class="max-w-[70%] max-h-[80%] object-contain"
-          loading="lazy"
-          width="200"
-          height="100"
-        />
-      </div>
-    )
+    <div class="-mx-6 -mt-6 mb-5 h-[180px] bg-[#F8F7FF] rounded-t-card overflow-hidden flex items-center justify-center">
+      <img
+        src={logo}
+        alt={logoAlt}
+        class="max-w-[60%] max-h-[100px] object-contain"
+        loading="lazy"
+        width="200"
+        height="100"
+      />
+    </div>
   ) : (
-    <div class="w-full h-36 rounded-stats mb-5 card-gradient flex items-center justify-center">
+    <div class="-mx-6 -mt-6 mb-5 h-[180px] card-gradient rounded-t-card overflow-hidden flex items-center justify-center">
       <span class="text-accent/30 text-[28px] font-bold select-none">
         {title.split(' ').map(w => w[0]).join('').slice(0, 3)}
       </span>
