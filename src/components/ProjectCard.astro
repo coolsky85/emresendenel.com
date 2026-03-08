@@ -10,6 +10,7 @@ interface Props {
   logo?: string;
   logoAlt?: string;
   isCoverImage?: boolean;
+  isLargeLogo?: boolean;
 }
 
 const {
@@ -23,6 +24,7 @@ const {
   logo,
   logoAlt = '',
   isCoverImage = false,
+  isLargeLogo = false,
 } = Astro.props;
 
 const statusClass = statusType === 'current' ? 'status-current'
@@ -37,10 +39,10 @@ const statusClass = statusType === 'current' ? 'status-current'
       <img
         src={logo}
         alt={logoAlt}
-        class={isCoverImage ? "w-full h-full object-cover" : "max-w-[60%] max-h-[100px] object-contain"}
+        class={isCoverImage ? "w-full h-full object-cover" : isLargeLogo ? "max-w-[85%] max-h-[140px] object-contain" : "max-w-[60%] max-h-[100px] object-contain"}
         loading="lazy"
-        width={isCoverImage ? "400" : "200"}
-        height={isCoverImage ? "180" : "100"}
+        width={isCoverImage ? "400" : isLargeLogo ? "300" : "200"}
+        height={isCoverImage ? "180" : isLargeLogo ? "140" : "100"}
       />
     </div>
   ) : (
